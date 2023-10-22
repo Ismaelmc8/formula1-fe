@@ -28,6 +28,7 @@ function App() {
         <Route path='/register' element={<Signup />} />
         <Route path='/home' element={<Home />} />
         <Route path='/leagues' element={<Leagues />} />
+        <Route path='/league/home' element={<LandingPage />} />
       </Routes>
       <About />
     </>

@@ -18,10 +18,17 @@
     justify-content: center;
     outline: 0;
     -webkit-tap-highlight-color: transparent;
-    -webkit-backface-visibility: hidden;
     backdrop-filter: blur(4px);
 }
 .width-popup-slim{
     flex: 0 0 auto;
     width: 21%;
 }
+
+.vertical-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './popupCreate.css';
-import { popupRequests } from './popupRequests';
+import { createRequest } from './popupRequests';
 
 import { Container, Row, Col, Table, Button, Card, Form } from 'react-bootstrap'
 
-const PopupCreate = () => {
+const PopupCreate = ({ apiUrl, onCancel }) => {
   const [leagueName, setLeagueName] = useState('');
 
   const handleLeagueNameChange = (event) => {
@@ -13,14 +13,11 @@ const PopupCreate = () => {
 
   const handleCreateButtonClicked = () => {
     if (leagueName) {
-      const apiUrl = 'yourApiEndpoint'; // Replace with your API endpoint
-      
-      // Send a POST request using Axios
-      axios
-        .post(apiUrl, { nombre_liga: leagueName })
-        .then((response) => {
+      // Call the createRequest function with the apiUrl and form data
+      createRequest('get',apiUrl, { league: leagueName })
+        .then((data) => {
           // Handle the response as needed
-          console.log('Request succeeded:', response.data);
+          console.log('Request succeeded:', data);
         })
         .catch((error) => {
           // Handle any errors
@@ -28,7 +25,10 @@ const PopupCreate = () => {
         });
     }
   };
-
+  const handleCancelButtonClicked = () => {
+    // Call the onCancel function passed as a prop to set a variable to false
+    onCancel(false);
+  };
 
   return (
     <>
@@ -41,16 +41,18 @@ const PopupCreate = () => {
               <Form.Group className='mb-3'>
                 <Form.Label>Nombre de la liga:</Form.Label>
                 <Form.Control
-                 type='text'/>
+                 type='text'
+                 value={leagueName}
+                 onChange={handleLeagueNameChange} />
               </Form.Group>
               <Row>
                 <Col className='d-grid'>
-                  <Button variant='danger'>
+                  <Button variant='danger' onClick={handleCancelButtonClicked}>
                     Cancel
                   </Button>
                 </Col>
                 <Col className='d-grid'>
-                  <Button variant='success'>
+                  <Button variant='success' onClick={handleCreateButtonClicked}>
                     Create
                   </Button>
                 </Col>
