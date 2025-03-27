@@ -1,4 +1,4 @@
-import React, { useContext }from 'react';
+import React, { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 //css
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +9,8 @@ import LandingPage from './pages/landingpage/LandingPage';
 import LoginPage from './pages/login/LoginPage';
 import Signup from './pages/signup/Signup';
 import Leagues from './pages/leagues/Leagues';
+import LeagueDetail from './pages/leagueDetail/LeagueDetail';
+import Pickem from './pages/pickem/Pickem';
 //components
 import NotAuthNavbar from './components/header/NotAuthNavbar';
 import NavbarCustom from './components/header/NavBarCustom';
@@ -28,7 +30,8 @@ function App() {
         <Route path='/register' element={<Signup />} />
         <Route path='/home' element={<Home />} />
         <Route path='/leagues' element={<Leagues />} />
-        <Route path='/league/home' element={<LandingPage />} />
+        <Route path='/league/:leagueUuid' element={<LeagueDetail />} />
+        <Route path='/pickem' element={<Pickem />} />
       </Routes>
       <About />
     </>

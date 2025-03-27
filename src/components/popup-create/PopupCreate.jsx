@@ -1,28 +1,22 @@
 import React, { useState } from 'react';
 import './popupCreate.css';
 import { createRequest } from './popupRequests';
-
+import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Table, Button, Card, Form } from 'react-bootstrap'
 
-const PopupCreate = ({ apiUrl, onCancel }) => {
+const PopupCreate = ({ text, apiUrl, onCancel, onAccept }) => {
   const [leagueName, setLeagueName] = useState('');
+  const [createPopUp, setCreatePopUp] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate hook  
 
   const handleLeagueNameChange = (event) => {
     setLeagueName(event.target.value);
   };
 
-  const handleCreateButtonClicked = () => {
+  const handleAcceptButtonClicked = () => {
+    // Call the onCreateButtonClick function passed as a prop
     if (leagueName) {
-      // Call the createRequest function with the apiUrl and form data
-      createRequest('get',apiUrl, { league: leagueName })
-        .then((data) => {
-          // Handle the response as needed
-          console.log('Request succeeded:', data);
-        })
-        .catch((error) => {
-          // Handle any errors
-          console.error('Request failed:', error);
-        });
+      onAccept(leagueName);
     }
   };
   const handleCancelButtonClicked = () => {
@@ -35,11 +29,11 @@ const PopupCreate = ({ apiUrl, onCancel }) => {
     <Row className='popup-card'>
         <Col className='width-popup-slim mx-auto'>
           <Card className='text-center p-5'>
-            <Card.Title className='mb-4'>Crear una Liga</Card.Title>
-            <Card.Subtitle className='mb-2'>Cre una liga e invita a tus amigos</Card.Subtitle>
+            <Card.Title className='mb-4'>{text.title}</Card.Title>
+            <Card.Subtitle className='mb-2'>{text.subtitle}</Card.Subtitle>
             <Form className='text-start'>
               <Form.Group className='mb-3'>
-                <Form.Label>Nombre de la liga:</Form.Label>
+                <Form.Label>{text.inputTitle}</Form.Label>
                 <Form.Control
                  type='text'
                  value={leagueName}
@@ -48,12 +42,12 @@ const PopupCreate = ({ apiUrl, onCancel }) => {
               <Row>
                 <Col className='d-grid'>
                   <Button variant='danger' onClick={handleCancelButtonClicked}>
-                    Cancel
+                  {text.cancel}
                   </Button>
                 </Col>
                 <Col className='d-grid'>
-                  <Button variant='success' onClick={handleCreateButtonClicked}>
-                    Create
+                  <Button variant='success' onClick={handleAcceptButtonClicked}>
+                    {text.accept}
                   </Button>
                 </Col>
               </Row>

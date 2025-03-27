@@ -1,0 +1,12 @@
+.selected {
+    background-color: #0ed407; /* Cambia este color según tus preferencias */
+  }
+  
+  .selected-pilot {
+    margin: 0 10px; /* Ajusta el margen según tus preferencias */
+  }
+  
+  .selected-pilot.middle {
+    position: relative;
+    top: -10px; /* Ajusta la posición vertical según tus preferencias */
+  }

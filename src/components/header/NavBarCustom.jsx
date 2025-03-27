@@ -14,6 +14,11 @@ const NavBarCustom = () => {
     authContext.setAuthToken(null); 
 
   };
+
+  const navBarItems = [
+    {route : '/leagues', name : 'Mis Tableros'},
+    {route : '/pickem', name : 'Picks'}
+  ]
   return (
     <>
       <Navbar className="bg-body-tertiary">
@@ -28,9 +33,17 @@ const NavBarCustom = () => {
             />{' '}
             LOGGED
           </Navbar.Brand>
-          <Nav className='me-auto'>
-            <Nav.Link href="/leagues">Mis Tableros</Nav.Link>
-          </Nav>
+          <Navbar.Collapse>
+          
+            {navBarItems?.map((item, index) => (
+              
+              <Nav key={index} className='ml-auto'>
+                <Nav.Link href={item.route}>{item.name}</Nav.Link>
+              </Nav>
+            ))}
+         
+          
+          </Navbar.Collapse>
           <Nav>
             <Nav.Link onClick={handleLogout} href="/">Loggout</Nav.Link>
           </Nav>

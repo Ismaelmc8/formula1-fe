@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 
 const About = () => {
   return (
+    /*
     <Container className='card_container'>
       <Card className='col m-2'>
         <Card.Img variant="top" src="holder.js/100px180" />
@@ -41,6 +42,8 @@ const About = () => {
         </Card.Body>
       </Card>
     </Container>
+    */
+   <></>
   )
 }
 
